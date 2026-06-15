@@ -392,8 +392,13 @@ class algorithm:
         pavement_cell_size_um_stats = s.compute_statistics(pavement_cell_sizes_um)
 
 
-        stomatal_density = n_stomata / obs_size_area_um2
-        stomatal_index = n_stomata / (n_stomata + n_pavement_cells) * 100
+        try:
+            stomatal_density = n_stomata / obs_size_area_um2
+            stomatal_index = n_stomata / (n_stomata + n_pavement_cells) * 100
+        except Exception as e:
+            stomatal_density = 0
+            stomatal_index = 0
+            print(e)
 
 
         data_output = [file_name, bname, total_elapsed_time, known_distance, pixels, pixel_ratio,
