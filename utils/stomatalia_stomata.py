@@ -256,7 +256,8 @@ class algorithm:
         if img.shape[1] != 2560 and img.shape[0] != 1920:
             img = cv2.resize(img, (2560, 1920))
 
-        results = self.detectron2_model.process_image(img=img)
+        results = self.detectron2_model.process_image(file_name=file_name)
+        print(len(results["output"]["preds"]))
         self.img_output_final = img.copy()
         elapsed_time = (time.perf_counter() - start)
         img_l, img_w, _ = img.shape
