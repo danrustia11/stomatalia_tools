@@ -2,7 +2,7 @@ import torch
 import os
 import numpy as np 
 
-import mlutils.models.detectron2_hooks as train_hook
+import stomatalia_tools.utils.detectron2_hooks as train_hook
 
 # Insseg
 from detectron2.evaluation import COCOEvaluator
