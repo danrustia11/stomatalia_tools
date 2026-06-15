@@ -126,7 +126,7 @@ utils:
     dataset_name: ""  # dataset name
     api_key: ""
     base_dir: ""
-    team_name: "
+    team_name: ""
     folder: ""
     version: 2                
 
