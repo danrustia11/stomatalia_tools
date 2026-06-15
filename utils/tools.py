@@ -114,13 +114,10 @@ def embed_output(img_output, a, cfg, custom_label=""):
 
             polygon_lengths = [len(px) for px in pp]
 
-            if cfg.display_cfg["contour_style"] == "simple":     
-                try:   
-                    max_polygon = pp[polygon_lengths.index(max(polygon_lengths))]
-                    px = [max_polygon.astype(np.int64).reshape(-1, 2)]
-                    cv2.drawContours(img_output, px, 0, color, cfg.display_cfg["thickness"]*2)
-                except:
-                    pass
+            if cfg.display_cfg["contour_style"] == "simple":      
+                max_polygon = pp[polygon_lengths.index(max(polygon_lengths))]
+                px = [max_polygon.astype(np.int64).reshape(-1, 2)]
+                cv2.drawContours(img_output, px, 0, color, cfg.display_cfg["thickness"]*2)
 
             if cfg.display_cfg["contour_style"] == "complex":
                 for polygon in pp:
