@@ -146,7 +146,7 @@ class detectron2_model():
                 outputs = self.predictor(img)["sem_seg"]
             elapsed_time = (time.perf_counter() - start)*1000
 
-
+        print(len(final_boxes))
 
  
             
