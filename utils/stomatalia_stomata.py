@@ -297,6 +297,7 @@ class algorithm:
         start = time.perf_counter()
         for i, p in enumerate(results["output"]["preds"]):   
             cl = p.cl-1
+            print(cl, p.box)
         
             polygons = p.polygons
             polygon_lengths = [len(p) for p in polygons]
