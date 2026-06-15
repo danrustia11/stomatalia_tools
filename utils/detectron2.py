@@ -144,6 +144,7 @@ class detectron2_model():
                     final_masks = np.asarray(final_masks)
             else:
                 outputs = self.predictor(img)["sem_seg"]
+            print(instances)
             elapsed_time = (time.perf_counter() - start)*1000
 
         print(len(final_boxes))
