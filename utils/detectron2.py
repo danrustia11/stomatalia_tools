@@ -144,7 +144,7 @@ class detectron2_model():
             # print(instances)
             elapsed_time = (time.perf_counter() - start)*1000
 
-        print(len(final_boxes))
+        # print(len(final_boxes))
 
  
             

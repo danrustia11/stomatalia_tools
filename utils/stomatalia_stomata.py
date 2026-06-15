@@ -257,7 +257,7 @@ class algorithm:
             img = cv2.resize(img, (2560, 1920))
 
         results = self.detectron2_model.process_image(file_name=file_name)
-        print(len(results["output"]["preds"]))
+        # print(len(results["output"]["preds"]))
         self.img_output_final = img.copy()
         elapsed_time = (time.perf_counter() - start)
         img_l, img_w, _ = img.shape
@@ -298,7 +298,7 @@ class algorithm:
         start = time.perf_counter()
         for i, p in enumerate(results["output"]["preds"]):   
             cl = p.cl-1
-            print(cl, p.box)
+            # print(cl, p.box)
         
             polygons = p.polygons
             polygon_lengths = [len(p) for p in polygons]

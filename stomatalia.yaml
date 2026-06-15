@@ -36,7 +36,7 @@ models:
         tile_style: ""
 
     train:
-      model: ["detectron2/configs/InstanceSegmentation/pointrend_rcnn_R_101_FPN_3x_coco.yaml"]
+      model: ["/content/detectron2/projects/PointRend/configs/InstanceSegmentation/pointrend_rcnn_R_101_FPN_3x_coco.yaml"]
       lr: [0.005, 0.001, 0.0005]                                                   # Learning rates (list)           
       optimizer: "auto"
       imgsz: 1600                                                     
@@ -47,7 +47,7 @@ models:
       include_empty: 1                                                      # Include images with 0 objects (boolean)
       
     inference:
-      device: "cuda"                                                                          # cuda, cpu
+      device: "cpu"                                                                          # cuda, cpu
       model_runtime: "default"                                                                   # runtime: default, onnx
       model_weights: "https://ndownloader.figshare.com/files/65245224"
 
@@ -74,7 +74,7 @@ utils:
   display:
     colors: ["#ff0000", "#0000ff", "#000000", "#441c5e", "#00ff00", "#cfcfcf"]
     save_scale: 1.0
-    show_contour: 0
+    show_contour: 1
     show_contour_alpha: 0
     show_labels: 0
     label_level: 1
