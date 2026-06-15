@@ -203,7 +203,7 @@ class algorithm:
                 for cnt, h in zip(contours, hierarchy[0]):
                     r = cv2.minAreaRect(cnt)
                     box = cv2.boxPoints(r)
-                    box = np.int0(box)
+                    box = np.uint8(box)
 
 
                     x, y = r[0]
