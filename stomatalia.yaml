@@ -1,0 +1,147 @@
+experiment:
+  name: "stomatalia"
+  target_model: "d2_insseg"
+  network_drive: ""
+  project_code: "3742314021_adapt_stomata"  
+  run_mode: "inference"                                                   # Testing mode (test/collect)
+  test_source: "folder"                                                 # folder, coco
+  download_darwin: 0
+  debug_level: 0
+
+
+
+
+
+models:
+  d2_insseg:
+    data:
+      classes: ["stomata", "pavement_cell"]
+      ver_path: "20240805"      
+      img_path: "images/stomata/{}"                                                           
+      ann_path: "labels/stomata/{}/{}"  
+      ann_format: "darwin"
+
+      test_img_path: ""                                                      # Target test path                                                
+      test_ann_path: ""                                                           # Target test path                                                
+      
+      keypoint:
+        enabled: 0
+        classes: ['']
+        skeleton_name: ""
+
+      tiler:
+        enabled: 0
+        tile_size: 0
+        padding: 0
+        tile_style: ""
+
+    train:
+      model: ["detectron2/configs/InstanceSegmentation/pointrend_rcnn_R_101_FPN_3x_coco.yaml"]
+      lr: [0.005, 0.001, 0.0005]                                                   # Learning rates (list)           
+      optimizer: "auto"
+      imgsz: 1600                                                     
+      split: [0.7, 0.2, 0.1]                                                    # Split [train, val, test]
+      batch_size: 2                                                             # Batch size
+      iterations: 1500                                                             # Iterations
+      retain_split: 1                                                       # Retain split? (boolean)
+      include_empty: 1                                                      # Include images with 0 objects (boolean)
+      
+    inference:
+      device: "cuda"                                                                          # cuda, cpu
+      model_runtime: "default"                                                                   # runtime: default, onnx
+      model_weights: "'https://ndownloader.figshare.com/files/65245224'"
+
+      nms_threshold: 0.5                                                         # NMS threshold 
+      score_threshold: 0.5                                                       # Confidence threshold
+      semanticize: 0                                                             # Convert instances to semantic predictions
+      multiclass_nms: 1
+      multiclass_nms_threshold: 0.5
+
+
+      custom:
+        enabled: 0
+        custom_processor_name: "stomatalia_stomata"
+        post_process: 0
+        mask_smoothing: 0
+        crop_pad: 20
+
+
+
+
+
+
+utils:
+  display:
+    colors: ["#ff0000", "#0000ff", "#000000", "#441c5e", "#00ff00", "#cfcfcf"]
+    save_scale: 1.0
+    show_contour: 1
+    show_contour_alpha: 0
+    show_labels: 0
+    label_level: 1
+    label_scale: 1
+    show_boxes: 0
+    show_output_window: 0
+    output_alpha: 0.1
+    thickness: 3
+    contour_style: "simple"
+    generate_annotation_images: 0
+    
+  test:
+    i_min: 0
+    i_max: 0
+    random: 0
+    filter: ""
+
+
+  tracking:
+    enabled: 0
+    software: "wandb"                                          # wandb or mlflow
+    mlflow_url: "http://localhost:11001"
+
+  eval:
+    enabled: 1
+    show_tp: 1
+    show_fp: 1
+    show_miss: 1
+    t_min: 0.3
+    t_max: 0.7
+
+  crop:
+    enabled: 0
+    size: 128
+    transparent: 1
+    style: "fixed"
+    square_crop: 0
+    pad: 64
+
+  pre_annotate:
+    enabled: 0
+    temp_folder: "semi_supervised"  
+    prompt: 0
+    skip_annotated: 0
+    upload_image: 0
+    upload_ann: 0
+
+  darwin:
+    dataset_name: ""  # dataset name
+    api_key: ""
+    base_dir: ""
+    team_name: "
+    folder: ""
+    version: 2                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
