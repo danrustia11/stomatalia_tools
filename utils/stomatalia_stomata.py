@@ -382,6 +382,7 @@ class algorithm:
         obs_size_area_um2 = obs_size_l_um * obs_size_w_um
         n_stomata = results["output"]["class_total"][0]
         n_pavement_cells = results["output"]["class_total"][1]
+        print(n_stomata, n_pavement_cells)
 
 
         stomata_size_px_stats = s.compute_statistics(stomata_sizes_px)
