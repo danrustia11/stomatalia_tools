@@ -298,59 +298,55 @@ class algorithm:
         for i, p in enumerate(results["output"]["preds"]):   
             cl = p.cl-1
         
-            try:
-                polygons = p.polygons
-                polygon_lengths = [len(p) for p in polygons]
-                max_polygon = polygons[polygon_lengths.index(max(polygon_lengths))]
-                if cl == 0:
-                    
-
-                    # Get object area
-                    p = self.measure_object_area(p, max_polygon, pixel_ratio)
-
-
-                    b = list(map(int, p.box))
-                    x1, y1, x2, y2 = b
-                    m = p.mask
-                    black = np.zeros((img.shape[0] , img.shape[1], 3), dtype = "uint8")
-                    mask_array = (np.asarray(m*1)).astype(np.uint8)
-                    mask_shaped = mask_array.reshape(img.shape[0], img.shape[1], 1)
-                    mask_out = cv2.bitwise_and(img, img, mask=mask_shaped)
-                    output_black = cv2.bitwise_or(black, mask_out)
-                    cropped_img_raw = img[y1:y2, x1:x2]
-                    cropped_img_blk = output_black[y1:y2, x1:x2]
-                    p, img_aperture = self.measure_aperture_size(cropped_img_raw, cropped_img_blk, p, pixel_ratio)
-
-                    # Display aperture
-                    self.img_output_final[y1:y2, x1:x2] = cv2.resize(img_aperture, (x2-x1, y2-y1))
-                    cv2.putText(self.img_output_final, "{} ({})".format(self.cfg.class_names[cl], round(p.score, 2)), (int(x1), int(y1)-60), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), self.cfg.display_cfg["thickness"])
-                    cv2.putText(self.img_output_final, "AL:{} AW:{}".format(p.aperture_l_px, p.aperture_w_px), (int(x1), int(y1)-30), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), self.cfg.display_cfg["thickness"])
-                    
-
-                    if p.area_um != 0:
-                        stomata_sizes_px.append(p.area_px)
-                        stomata_sizes_um.append(p.area_um)
-                        stomata_ratios.append(p.ratio)
-                        stomata_aperture_sizes_l_px.append(p.aperture_w_px)
-                        stomata_aperture_sizes_w_px.append(p.aperture_l_px)
-                        stomata_aperture_sizes_l_um.append(p.aperture_w_um)
-                        stomata_aperture_sizes_w_um.append(p.aperture_l_um)
-
-                if cl == 1:            
-                    area_px = cv2.contourArea(max_polygon.astype(np.int64).reshape(-1, 2))
-                    area_um = int(area_px*pixel_ratio)
-
-                    p.area_um = area_um
-                    p.area_px = area_px
-
-                    if p.area_um != 0:
-                        pavement_cell_sizes_px.append(p.area_px)
-                        pavement_cell_sizes_um.append(p.area_um)
-
+            polygons = p.polygons
+            polygon_lengths = [len(p) for p in polygons]
+            max_polygon = polygons[polygon_lengths.index(max(polygon_lengths))]
+            if cl == 0:
                 
-            except Exception as e:
-                print(e)
-        
+
+                # Get object area
+                p = self.measure_object_area(p, max_polygon, pixel_ratio)
+
+
+                b = list(map(int, p.box))
+                x1, y1, x2, y2 = b
+                m = p.mask
+                black = np.zeros((img.shape[0] , img.shape[1], 3), dtype = "uint8")
+                mask_array = (np.asarray(m*1)).astype(np.uint8)
+                mask_shaped = mask_array.reshape(img.shape[0], img.shape[1], 1)
+                mask_out = cv2.bitwise_and(img, img, mask=mask_shaped)
+                output_black = cv2.bitwise_or(black, mask_out)
+                cropped_img_raw = img[y1:y2, x1:x2]
+                cropped_img_blk = output_black[y1:y2, x1:x2]
+                p, img_aperture = self.measure_aperture_size(cropped_img_raw, cropped_img_blk, p, pixel_ratio)
+
+                # Display aperture
+                self.img_output_final[y1:y2, x1:x2] = cv2.resize(img_aperture, (x2-x1, y2-y1))
+                cv2.putText(self.img_output_final, "{} ({})".format(self.cfg.class_names[cl], round(p.score, 2)), (int(x1), int(y1)-60), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), self.cfg.display_cfg["thickness"])
+                cv2.putText(self.img_output_final, "AL:{} AW:{}".format(p.aperture_l_px, p.aperture_w_px), (int(x1), int(y1)-30), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), self.cfg.display_cfg["thickness"])
+                
+
+                if p.area_um != 0:
+                    stomata_sizes_px.append(p.area_px)
+                    stomata_sizes_um.append(p.area_um)
+                    stomata_ratios.append(p.ratio)
+                    stomata_aperture_sizes_l_px.append(p.aperture_w_px)
+                    stomata_aperture_sizes_w_px.append(p.aperture_l_px)
+                    stomata_aperture_sizes_l_um.append(p.aperture_w_um)
+                    stomata_aperture_sizes_w_um.append(p.aperture_l_um)
+
+            if cl == 1:            
+                area_px = cv2.contourArea(max_polygon.astype(np.int64).reshape(-1, 2))
+                area_um = int(area_px*pixel_ratio)
+
+                p.area_um = area_um
+                p.area_px = area_px
+
+                if p.area_um != 0:
+                    pavement_cell_sizes_px.append(p.area_px)
+                    pavement_cell_sizes_um.append(p.area_um)
+
+
         
         
 
