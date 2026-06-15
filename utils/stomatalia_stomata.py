@@ -10,12 +10,10 @@ from imutils import perspective
 from scipy.spatial import distance as dist
 from tqdm import tqdm
 
-import utils.tools.detectron2 as d2
-import utils.tools.config as config
-import utils.tools.shortcuts as s
-
-
-import utils.tools as tools
+import stomatalia_tools.utils.detectron2 as d2
+import stomatalia_tools.utils.config as config
+import stomatalia_tools.utils.shortcuts as s
+import stomatalia_tools.utils as tools
 
 import requests
 import math

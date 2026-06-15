@@ -14,10 +14,10 @@ from detectron2.projects.deeplab import add_deeplab_config
 
 
 # MLUtils
-import utils.tools.config as config
-from utils.tools.detectron2_objects import SemsegPredictor
-import utils.tools as tools
-import utils.tools.ann_data as ann_data
+import stomatalia_tools.utils.tools.config as config
+from stomatalia_tools.utils.tools.detectron2_objects import SemsegPredictor
+import stomatalia_tools.utils.tools as tools
+import stomatalia_tools.utils.tools.ann_data as ann_data
 
 
 
