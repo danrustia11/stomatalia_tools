@@ -74,7 +74,7 @@ utils:
   display:
     colors: ["#ff0000", "#0000ff", "#000000", "#441c5e", "#00ff00", "#cfcfcf"]
     save_scale: 1.0
-    show_contour: 1
+    show_contour: 0
     show_contour_alpha: 0
     show_labels: 0
     label_level: 1
