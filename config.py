@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 
-import mlutils.shortcuts.shortcuts as s
+import stomatalia_tools.shortcuts as s
 
 
 class config():
