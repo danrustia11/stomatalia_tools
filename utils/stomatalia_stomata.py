@@ -251,8 +251,8 @@ class algorithm:
         # Perform inference on the image
         start = time.perf_counter() 
 
-        # img = cv2.imread(file_name)
-        print(scale)
+        img = cv2.imread(file_name)
+        
         if img.shape[1] != 2560 and img.shape[0] != 1920:
             img = cv2.resize(img, (2560, 1920))
 
