@@ -11,9 +11,9 @@ from scipy.spatial import distance as dist
 from tqdm import tqdm
 
 import stomatalia_tools.utils.detectron2 as d2
-import stomatalia_tools.utils.config as config
+import stomatalia_tools.config as config
 import stomatalia_tools.utils.shortcuts as s
-import stomatalia_tools.utils as tools
+import stomatalia_tools.utils.tools as tools
 
 import requests
 import math
