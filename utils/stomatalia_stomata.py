@@ -283,10 +283,12 @@ class algorithm:
         # 0.259 = 50um/(193)
         if scale == 100:
             pixels = 207
-        if scale == 20:
+        elif scale == 20:
             pixels = 183
-        if scale == 50:
+        elif scale == 50:
             pixels = 193
+        else:
+            pixels = 183
 
         known_distance = scale
         pixel_ratio = round(known_distance/pixels, 4)
@@ -334,14 +336,6 @@ class algorithm:
                         stomata_aperture_sizes_l_um.append(p.aperture_w_um)
                         stomata_aperture_sizes_w_um.append(p.aperture_l_um)
 
-                        
-
-
-
-
-
-
-
                 if cl == 1:            
                     area_px = cv2.contourArea(max_polygon.astype(np.int64).reshape(-1, 2))
                     area_um = int(area_px*pixel_ratio)
@@ -383,6 +377,8 @@ class algorithm:
         n_stomata = results["output"]["class_total"][0]
         n_pavement_cells = results["output"]["class_total"][1]
         print(n_stomata, n_pavement_cells)
+        print(n_stomata)
+        print(obs_size_area_um2)
 
 
         stomata_size_px_stats = s.compute_statistics(stomata_sizes_px)
@@ -392,8 +388,6 @@ class algorithm:
         stomata_aperture_size_l_px_stats = s.compute_statistics(stomata_aperture_sizes_l_px)
         stomata_aperture_size_w_um_stats = s.compute_statistics(stomata_aperture_sizes_w_um)
         stomata_aperture_size_l_um_stats = s.compute_statistics(stomata_aperture_sizes_l_um)
-
-
         pavement_cell_size_px_stats = s.compute_statistics(pavement_cell_sizes_px)
         pavement_cell_size_um_stats = s.compute_statistics(pavement_cell_sizes_um)
 
