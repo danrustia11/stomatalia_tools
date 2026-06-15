@@ -17,7 +17,7 @@ from detectron2.projects.deeplab import add_deeplab_config
 import stomatalia_tools.config as config
 from stomatalia_tools.utils.detectron2_objects import SemsegPredictor
 import stomatalia_tools.utils.tools as tools
-import stomatalia_tools.utils.tools.ann_data as ann_data
+from stomatalia_tools.utils.tools import ann_data
 
 
 
