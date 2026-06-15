@@ -132,19 +132,16 @@ class detectron2_model():
             img_output = img.copy()
             if self.operation != "semantic_segmentation":
                 outputs = self.predictor(img)
-                if self.cfg.multiclass_nms:
-                    final_boxes, final_scores, final_classes, final_masks  = tools.multiclass_nms(outputs, 
-                                                                                                self.cfg.multiclass_nms_threshold)
-                else:
-                    instances = outputs["instances"].to("cpu")
-                    final_classes = instances.pred_classes.numpy()
-                    final_scores = instances.scores.numpy()
-                    final_boxes = instances.pred_boxes.tensor.numpy()
-                    final_masks = instances.pred_masks
-                    final_masks = np.asarray(final_masks)
+        
+                instances = outputs["instances"].to("cpu")
+                final_classes = instances.pred_classes.numpy()
+                final_scores = instances.scores.numpy()
+                final_boxes = instances.pred_boxes.tensor.numpy()
+                final_masks = instances.pred_masks
+                final_masks = np.asarray(final_masks)
             else:
                 outputs = self.predictor(img)["sem_seg"]
-            print(instances)
+            # print(instances)
             elapsed_time = (time.perf_counter() - start)*1000
 
         print(len(final_boxes))

@@ -103,7 +103,7 @@ class algorithm:
     def __init__(self, cfg_filename):
         self.cfg = config.config(cfg_filename=cfg_filename, target_model="d2_insseg")
         url =  self.cfg.cfg["models"]["d2_insseg"]["inference"]["model_weights"]
-        output_path = "model.pth"
+        output_path = "pointrend.pth"
 
         if not os.path.exists(output_path):
             for i in range(10):
